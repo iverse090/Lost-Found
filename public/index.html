@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lost & Found — Ramgarh Engineering College</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#0a1628;--navy-mid:#142240;--accent:#e8520a;--accent2:#f5a623;--sky:#1e7fd4;--sky-light:#dbeeff;--surface:#f7f8fc;--white:#fff;--border:#e0e6f0;--text:#0f1c2e;--muted:#647080;--success:#0e7f3c;--success-bg:#e6f4ec;--danger:#b91c1c;--danger-bg:#fef2f2;--warn:#92400e;--warn-bg:#fffbeb;--radius:12px;--radius-lg:18px;--shadow:0 2px 16px rgba(10,22,40,.09);--shadow-lg:0 8px 40px rgba(10,22,40,.14)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--text);min-height:100vh;overflow-x:hidden}
+nav{background:var(--navy);position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:64px;box-shadow:0 2px 20px rgba(0,0,0,.35)}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
+.nav-logo{width:36px;height:36px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:#fff}
+.nav-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:#fff}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{color:rgba(255,255,255,.72);text-decoration:none;padding:7px 14px;border-radius:8px;font-size:14px;transition:.18s;cursor:pointer}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.1)}
+.nav-links a.active{color:#fff;background:rgba(255,255,255,.15)}
+.nav-btn{background:var(--accent);color:#fff!important;font-weight:500!important;border-radius:8px;padding:8px 18px!important}
+.nav-btn:hover{background:#c9400a!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.hamburger span{width:22px;height:2px;background:#fff;border-radius:2px}
+.page{display:none;animation:fadeUp .35s ease}
+.page.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.hero{background:linear-gradient(135deg,var(--navy) 0%,#1a3a6e 60%,#0e4f8e 100%);padding:72px 32px 60px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='.03'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);font-size:13px;padding:5px 14px;border-radius:100px;margin-bottom:20px}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:14px}
+.hero h1 span{color:var(--accent2)}
+.hero p{color:rgba(255,255,255,.7);font-size:16px;max-width:520px;margin:0 auto 32px;line-height:1.7}
+.search-wrap{display:flex;max-width:560px;margin:0 auto;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.25)}
+.search-wrap input{flex:1;padding:16px 20px;font-size:15px;border:none;outline:none;background:#fff;font-family:'DM Sans',sans-serif;color:var(--text)}
+.search-wrap select{padding:0 14px;border:none;border-left:1px solid var(--border);background:#fff;font-size:14px;color:var(--muted);outline:none;font-family:'DM Sans',sans-serif;cursor:pointer;min-width:120px}
+.search-wrap button{padding:0 26px;background:var(--accent);border:none;color:#fff;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:.2s}
+.search-wrap button:hover{background:#c9400a}
+.hero-stats{display:flex;justify-content:center;gap:40px;margin-top:40px;flex-wrap:wrap}
+.hero-stat .num{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:700;color:#fff}
+.hero-stat .lbl{font-size:12px;color:rgba(255,255,255,.55);margin-top:2px}
+.section{padding:52px 32px;max-width:1180px;margin:0 auto}
+.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:28px}
+.section-title{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700}
+.section-link{font-size:13px;color:var(--sky);cursor:pointer;font-weight:500}
+.section-link:hover{text-decoration:underline}
+.cat-pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.cat-pill{padding:7px 18px;border-radius:100px;border:1.5px solid var(--border);background:#fff;font-size:13px;color:var(--muted);cursor:pointer;transition:.18s;font-weight:500}
+.cat-pill:hover,.cat-pill.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.item-card{background:#fff;border-radius:var(--radius-lg);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:.2s;box-shadow:var(--shadow)}
+.item-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--sky)}
+.card-img{width:100%;height:180px;object-fit:cover;background:var(--sky-light);display:flex;align-items:center;justify-content:center;font-size:3.5rem}
+.card-body{padding:16px}
+.card-tags{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.tag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:100px}
+.tag-lost{background:#fff0ec;color:#b83200}
+.tag-found{background:var(--success-bg);color:var(--success)}
+.tag-claimed{background:#f0f0ff;color:#4338ca}
+.tag-cat{background:var(--sky-light);color:var(--sky)}
+.card-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:600;margin-bottom:4px}
+.card-loc{font-size:12px;color:var(--muted);margin-bottom:4px}
+.card-date{font-size:11px;color:var(--muted)}
+.card-id{font-size:11px;color:var(--muted);font-family:monospace;margin-top:6px}
+.card-reward{margin-top:8px;font-size:12px;color:var(--warn);font-weight:500;background:var(--warn-bg);padding:4px 10px;border-radius:6px;display:inline-block}
+.action-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:48px}
+.action-tile{background:#fff;border-radius:var(--radius-lg);border:1px solid var(--border);padding:28px 24px;cursor:pointer;transition:.2s;text-align:center;box-shadow:var(--shadow)}
+.action-tile:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.action-tile .icon{font-size:2.4rem;margin-bottom:12px}
+.action-tile h3{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px}
+.action-tile p{font-size:13px;color:var(--muted);line-height:1.5}
+.tile-lost{border-top:3px solid var(--accent)}
+.tile-found{border-top:3px solid var(--success)}
+.tile-search{border-top:3px solid var(--sky)}
+.tile-claim{border-top:3px solid #7c3aed}
+.form-page{max-width:640px;margin:0 auto;padding:40px 32px}
+.form-card{background:#fff;border-radius:var(--radius-lg);border:1px solid var(--border);padding:36px;box-shadow:var(--shadow)}
+.form-title{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:700;margin-bottom:6px}
+.form-subtitle{font-size:14px;color:var(--muted);margin-bottom:28px}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-size:13px;font-weight:500;margin-bottom:6px}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;transition:.18s;outline:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--sky);box-shadow:0 0 0 3px rgba(30,127,212,.12)}
+.form-group textarea{min-height:90px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-hint{font-size:12px;color:var(--muted);margin-top:4px}
+.upload-zone{border:2px dashed var(--border);border-radius:var(--radius);padding:28px;text-align:center;cursor:pointer;transition:.2s;background:var(--surface)}
+.upload-zone:hover{border-color:var(--sky);background:var(--sky-light)}
+.upload-zone input{display:none}
+.upload-icon{font-size:2rem;margin-bottom:8px}
+.upload-zone p{font-size:13px;color:var(--muted)}
+.upload-zone b{color:var(--sky)}
+.upload-preview{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.upload-preview img{width:72px;height:72px;object-fit:cover;border-radius:8px;border:1px solid var(--border)}
+.btn{padding:13px 28px;border-radius:var(--radius);font-size:15px;font-weight:500;font-family:'DM Sans',sans-serif;border:none;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#c9400a;transform:translateY(-1px)}
+.btn-secondary{background:var(--navy);color:#fff}
+.btn-secondary:hover{background:var(--navy-mid)}
+.btn-outline{background:#fff;color:var(--text);border:1.5px solid var(--border)}
+.btn-outline:hover{border-color:var(--sky);color:var(--sky)}
+.btn-success{background:var(--success);color:#fff}
+.btn-success:hover{background:#075c2c}
+.btn-full{width:100%;justify-content:center}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+.toast-wrap{position:fixed;bottom:28px;right:28px;display:flex;flex-direction:column;gap:10px;z-index:9999}
+.toast{background:var(--navy);color:#fff;padding:13px 20px;border-radius:10px;font-size:14px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:10px;animation:slideIn .3s ease;min-width:240px}
+.toast.success{border-left:4px solid #22c55e}
+.toast.error{border-left:4px solid #ef4444}
+.toast.info{border-left:4px solid var(--sky)}
+@keyframes slideIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,22,40,.55);z-index:200;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:var(--radius-lg);max-width:580px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:fadeUp .3s ease}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:24px 28px 0}
+.modal-title{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700}
+.modal-close{background:none;border:none;cursor:pointer;font-size:20px;color:var(--muted);width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;transition:.18s}
+.modal-close:hover{background:var(--surface)}
+.modal-body{padding:20px 28px 28px}
+.modal-img{width:100%;height:220px;object-fit:cover;border-radius:10px;margin-bottom:16px;background:var(--sky-light);display:flex;align-items:center;justify-content:center;font-size:4rem}
+.detail-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px}
+.detail-row:last-of-type{border-bottom:none}
+.detail-label{color:var(--muted);font-weight:500}
+.detail-value{color:var(--text);text-align:right;max-width:60%}
+.modal-actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.auth-wrap{min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;padding:40px 20px;background:linear-gradient(135deg,var(--navy) 0%,#1a3a6e 100%)}
+.auth-card{background:#fff;border-radius:var(--radius-lg);padding:40px;width:100%;max-width:400px;box-shadow:var(--shadow-lg)}
+.auth-title{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:700;margin-bottom:4px}
+.auth-sub{font-size:14px;color:var(--muted);margin-bottom:28px}
+.auth-toggle{text-align:center;margin-top:20px;font-size:14px;color:var(--muted)}
+.auth-toggle a{color:var(--sky);cursor:pointer;font-weight:500}
+.auth-toggle a:hover{text-decoration:underline}
+.verify-wrap{max-width:700px;margin:0 auto;padding:40px 32px}
+.verify-card{background:#fff;border-radius:var(--radius-lg);border:1px solid var(--border);padding:32px;box-shadow:var(--shadow)}
+.step-track{display:flex;margin-bottom:32px}
+.step{flex:1;text-align:center;position:relative}
+.step::before{content:'';position:absolute;top:16px;left:50%;width:100%;height:2px;background:var(--border);z-index:0}
+.step:last-child::before{display:none}
+.step-dot{width:32px;height:32px;border-radius:50%;background:var(--border);color:var(--muted);font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;position:relative;z-index:1;transition:.3s}
+.step.done .step-dot{background:var(--success);color:#fff}
+.step.active .step-dot{background:var(--sky);color:#fff}
+.step-label{font-size:11px;color:var(--muted);font-weight:500}
+.step.active .step-label{color:var(--sky)}
+.reward-wrap{max-width:520px;margin:0 auto;padding:40px 32px}
+.reward-card{background:#fff;border-radius:var(--radius-lg);border:1px solid var(--border);padding:36px;box-shadow:var(--shadow)}
+.reward-amounts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.amount-btn{padding:10px;border-radius:var(--radius);border:1.5px solid var(--border);background:#fff;font-size:14px;font-weight:600;cursor:pointer;transition:.18s;font-family:'DM Sans',sans-serif}
+.amount-btn:hover,.amount-btn.selected{background:var(--navy);color:#fff;border-color:var(--navy)}
+.map-wrap{max-width:900px;margin:0 auto;padding:40px 32px}
+.map-placeholder{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow)}
+.map-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.map-frame{width:100%;height:480px;border:none}
+.map-legend{display:flex;gap:20px;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.legend-dot{width:10px;height:10px;border-radius:50%}
+.chat-wrap{max-width:680px;margin:0 auto;padding:40px 32px}
+.chat-container{background:#fff;border-radius:var(--radius-lg);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;height:520px}
+.chat-header{background:var(--navy);padding:16px 20px;display:flex;align-items:center;gap:12px}
+.chat-avatar{width:36px;height:36px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:18px}
+.chat-header-info h4{font-size:14px;font-weight:600;color:#fff}
+.chat-header-info p{font-size:12px;color:rgba(255,255,255,.6)}
+.chat-status{width:8px;height:8px;background:#22c55e;border-radius:50%;margin-left:auto}
+.chat-messages{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px;background:var(--surface)}
+.msg{max-width:75%;padding:10px 14px;border-radius:14px;font-size:14px;line-height:1.6}
+.msg-bot{background:#fff;border:1px solid var(--border);border-radius:14px 14px 14px 4px;align-self:flex-start}
+.msg-user{background:var(--navy);color:#fff;border-radius:14px 14px 4px 14px;align-self:flex-end}
+.chat-input{border-top:1px solid var(--border);padding:14px 16px;display:flex;gap:10px;align-items:center;background:#fff}
+.chat-input input{flex:1;border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;font-size:14px;outline:none;font-family:'DM Sans',sans-serif;transition:.18s}
+.chat-input input:focus{border-color:var(--sky)}
+.chat-send{background:var(--sky);color:#fff;border:none;border-radius:8px;padding:10px 16px;font-size:14px;cursor:pointer;transition:.2s}
+.chat-send:hover{background:#1565aa}
+.typing{display:flex;align-items:center;gap:4px;padding:10px 14px;background:#fff;border:1px solid var(--border);border-radius:14px;align-self:flex-start}
+.typing span{width:6px;height:6px;background:var(--muted);border-radius:50%;animation:bounce .8s infinite}
+.typing span:nth-child(2){animation-delay:.15s}
+.typing span:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+.profile-wrap{max-width:800px;margin:0 auto;padding:40px 32px}
+.profile-header{background:#fff;border-radius:var(--radius-lg);border:1px solid var(--border);padding:28px;margin-bottom:24px;display:flex;align-items:center;gap:20px;box-shadow:var(--shadow)}
+.profile-avatar{width:72px;height:72px;border-radius:50%;background:var(--sky);display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:700;color:#fff;font-family:'Syne',sans-serif;flex-shrink:0}
+.profile-info h2{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700}
+.profile-info p{color:var(--muted);font-size:14px;margin-top:2px}
+.profile-badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:100px;background:var(--sky-light);color:var(--sky);margin-top:10px;display:inline-block}
+.tabs{display:flex;gap:4px;background:var(--surface);border-radius:10px;padding:4px;margin-bottom:20px;border:1px solid var(--border)}
+.tab{flex:1;padding:9px;border-radius:8px;border:none;background:transparent;cursor:pointer;font-size:13px;font-weight:500;color:var(--muted);font-family:'DM Sans',sans-serif;transition:.18s}
+.tab.active{background:#fff;color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty-icon{font-size:3rem;margin-bottom:14px}
+.empty h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:8px}
+.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--sky);border-radius:50%;animation:spin .7s linear infinite;margin:40px auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+footer{background:var(--navy);color:rgba(255,255,255,.65);text-align:center;padding:32px 20px;font-size:13px;margin-top:60px}
+footer strong{color:#fff}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:768px){
+  nav{padding:0 16px}
+  .nav-links{display:none;position:fixed;top:64px;left:0;right:0;background:var(--navy);flex-direction:column;padding:16px;gap:2px;z-index:99}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:12px 16px}
+  .hamburger{display:flex}
+  .hero{padding:48px 20px 40px}
+  .section,.form-page,.verify-wrap,.reward-wrap,.map-wrap,.chat-wrap,.profile-wrap{padding:24px 16px}
+  .form-card,.verify-card,.reward-card{padding:24px 20px}
+  .form-row{grid-template-columns:1fr}
+  .hero-stats{gap:24px}
+  .action-grid{grid-template-columns:1fr 1fr}
+  .reward-amounts{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand" onclick="navigate('home')">
+    <div class="nav-logo">LF</div>
+    <span class="nav-title">Lost & Found — REC</span>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a onclick="navigate('home')" class="active" id="nav-home">Home</a>
+    <a onclick="navigate('browse')" id="nav-browse">Browse</a>
+    <a onclick="navigate('map')" id="nav-map">Map</a>
+    <a onclick="navigate('chat')" id="nav-chat">Assistant</a>
+    <a onclick="navigate('profile')" id="nav-profile">My Account</a>
+    <a onclick="navigate('login')" class="nav-btn" id="nav-login">Sign In</a>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-badge">🎓 Ramgarh Engineering College Campus</div>
+    <h1>Lost something?<br><span>We'll help you find it.</span></h1>
+    <p>The official Lost & Found platform for the REC community — students, staff & faculty.</p>
+    <div class="search-wrap">
+      <input type="text" id="heroSearch" placeholder="Search by item, keyword, or location…" onkeydown="if(event.key==='Enter')doSearch()"/>
+      <select id="heroFilter">
+        <option value="all">All Items</option>
+        <option value="lost">Lost</option>
+        <option value="found">Found</option>
+      </select>
+      <button onclick="doSearch()">Search</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num" id="statTotal">—</div><div class="lbl">Total Listings</div></div>
+      <div class="hero-stat"><div class="num" id="statReturned">—</div><div class="lbl">Items Returned</div></div>
+      <div class="hero-stat"><div class="num" id="statActive">—</div><div class="lbl">Active Reports</div></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="action-grid">
+      <div class="action-tile tile-lost" onclick="navigate('lost-form')"><div class="icon">📦</div><h3>Report Lost Item</h3><p>Tell us what you lost so the community can help you find it.</p></div>
+      <div class="action-tile tile-found" onclick="navigate('found-form')"><div class="icon">🔍</div><h3>Report Found Item</h3><p>Found something? Post it here and reunite it with its owner.</p></div>
+      <div class="action-tile tile-search" onclick="navigate('browse')"><div class="icon">🗂️</div><h3>Browse All Listings</h3><p>Search recent lost and found reports on campus.</p></div>
+      <div class="action-tile tile-claim" onclick="navigate('verify')"><div class="icon">✅</div><h3>Claim Verification</h3><p>Already found your item? Submit a claim to verify ownership.</p></div>
+    </div>
+    <div class="section-header">
+      <div class="section-title">Recent Listings</div>
+      <span class="section-link" onclick="navigate('browse')">View all →</span>
+    </div>
+    <div class="cat-pills" id="homeCats">
+      <div class="cat-pill active" onclick="filterHome(this,'all')">All</div>
+      <div class="cat-pill" onclick="filterHome(this,'Electronics')">Electronics</div>
+      <div class="cat-pill" onclick="filterHome(this,'Accessories')">Accessories</div>
+      <div class="cat-pill" onclick="filterHome(this,'Documents')">Documents</div>
+      <div class="cat-pill" onclick="filterHome(this,'Clothing')">Clothing</div>
+      <div class="cat-pill" onclick="filterHome(this,'Other')">Other</div>
+    </div>
+    <div class="grid" id="homeGrid"><div class="spinner"></div></div>
+  </div>
+</div>
+
+<!-- BROWSE -->
+<div class="page" id="page-browse">
+  <div class="section">
+    <div class="section-header"><div class="section-title">Browse All Listings</div></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;align-items:center">
+      <input type="text" id="browseQ" placeholder="Search items…" style="flex:1;min-width:180px;padding:10px 14px;border-radius:10px;border:1.5px solid var(--border);font-size:14px;font-family:'DM Sans',sans-serif;outline:none" oninput="renderBrowse()"/>
+      <select id="browseType" onchange="renderBrowse()" style="padding:10px 14px;border-radius:10px;border:1.5px solid var(--border);font-size:14px;font-family:'DM Sans',sans-serif;background:#fff;outline:none;cursor:pointer">
+        <option value="all">Lost & Found</option><option value="lost">Lost Only</option><option value="found">Found Only</option>
+      </select>
+      <select id="browseCat" onchange="renderBrowse()" style="padding:10px 14px;border-radius:10px;border:1.5px solid var(--border);font-size:14px;font-family:'DM Sans',sans-serif;background:#fff;outline:none;cursor:pointer">
+        <option value="all">All Categories</option><option>Electronics</option><option>Accessories</option><option>Documents</option><option>Clothing</option><option>Other</option>
+      </select>
+      <select id="browseSort" onchange="renderBrowse()" style="padding:10px 14px;border-radius:10px;border:1.5px solid var(--border);font-size:14px;font-family:'DM Sans',sans-serif;background:#fff;outline:none;cursor:pointer">
+        <option value="newest">Newest First</option><option value="oldest">Oldest First</option><option value="reward">Has Reward</option>
+      </select>
+    </div>
+    <div class="grid" id="browseGrid"><div class="spinner"></div></div>
+    <div id="browseEmpty" class="empty" style="display:none"><div class="empty-icon">🔎</div><h3>No items found</h3><p>Try adjusting your filters</p></div>
+  </div>
+</div>
+
+<!-- LOST FORM -->
+<div class="page" id="page-lost-form">
+  <div class="form-page">
+    <div class="form-card">
+      <div class="form-title">📦 Report Lost Item</div>
+      <div class="form-subtitle">Fill in the details to help others identify and return your item.</div>
+      <div class="form-group"><label>Item Name *</label><input type="text" id="l_name" placeholder="e.g. ASUS TUF Laptop, Black Wallet"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Category *</label><select id="l_cat"><option value="">Select…</option><option>Electronics</option><option>Accessories</option><option>Documents</option><option>Clothing</option><option>Other</option></select></div>
+        <div class="form-group"><label>Date Lost *</label><input type="date" id="l_date"/></div>
+      </div>
+      <div class="form-group"><label>Last Seen Location *</label><input type="text" id="l_loc" placeholder="e.g. PPS Lab, Block B, Deepak Canteen…"/></div>
+      <div class="form-group"><label>Description *</label><textarea id="l_desc" placeholder="Colour, brand, unique marks, serial number…"></textarea></div>
+      <div class="form-group"><label>Contact Email *</label><input type="email" id="l_email" placeholder="your@email.com"/></div>
+      <div class="form-group"><label>Contact Phone</label><input type="tel" id="l_phone" placeholder="+91 …"/></div>
+      <div class="form-group"><label>Reward Offered (₹)</label><input type="number" id="l_reward" placeholder="0 if none" min="0"/><div class="form-hint">Optional — a reward increases the chance of recovery.</div></div>
+      <div class="form-group">
+        <label>Upload Photo(s)</label>
+        <div class="upload-zone" onclick="document.getElementById('l_photos').click()">
+          <input type="file" id="l_photos" accept="image/*" multiple onchange="previewPhotos('l_photos','l_preview')"/>
+          <div class="upload-icon">📷</div><p><b>Click to upload</b> or drag & drop</p><p>PNG, JPG up to 10 MB each (max 5)</p>
+        </div>
+        <div class="upload-preview" id="l_preview"></div>
+      </div>
+      <button class="btn btn-primary btn-full" onclick="submitLost()" id="lostBtn">Submit Report</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOUND FORM -->
+<div class="page" id="page-found-form">
+  <div class="form-page">
+    <div class="form-card">
+      <div class="form-title">🔍 Report Found Item</div>
+      <div class="form-subtitle">Help reunite someone with their lost item.</div>
+      <div class="form-group"><label>Item Name *</label><input type="text" id="f_name" placeholder="e.g. Titan Watch, Samsung Mobile"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Category *</label><select id="f_cat"><option value="">Select…</option><option>Electronics</option><option>Accessories</option><option>Documents</option><option>Clothing</option><option>Other</option></select></div>
+        <div class="form-group"><label>Date Found *</label><input type="date" id="f_date"/></div>
+      </div>
+      <div class="form-group"><label>Where Found *</label><input type="text" id="f_loc" placeholder="e.g. Staff Room, PPS Lab, Hostel Block A…"/></div>
+      <div class="form-group"><label>Description *</label><textarea id="f_desc" placeholder="Colour, brand, condition, unique markings…"></textarea></div>
+      <div class="form-group"><label>Item Currently At *</label><input type="text" id="f_holding" placeholder="e.g. Security Office, Room 204 Hostel A…"/><div class="form-hint">Let the owner know where to collect it.</div></div>
+      <div class="form-group"><label>Contact Email *</label><input type="email" id="f_email" placeholder="your@email.com"/></div>
+      <div class="form-group"><label>Contact Phone</label><input type="tel" id="f_phone" placeholder="+91 …"/></div>
+      <div class="form-group">
+        <label>Upload Photo(s) *</label>
+        <div class="upload-zone" onclick="document.getElementById('f_photos').click()">
+          <input type="file" id="f_photos" accept="image/*" multiple onchange="previewPhotos('f_photos','f_preview')"/>
+          <div class="upload-icon">📷</div><p><b>Click to upload</b> or drag & drop</p><p>PNG, JPG up to 10 MB each (max 5)</p>
+        </div>
+        <div class="upload-preview" id="f_preview"></div>
+      </div>
+      <button class="btn btn-success btn-full" onclick="submitFound()" id="foundBtn">Submit Found Report</button>
+    </div>
+  </div>
+</div>
+
+<!-- VERIFY -->
+<div class="page" id="page-verify">
+  <div class="verify-wrap">
+    <div style="margin-bottom:24px"><div class="section-title" style="font-size:1.5rem">✅ Claim Verification</div><div style="font-size:14px;color:var(--muted);margin-top:6px">Submit proof of ownership to claim a found item.</div></div>
+    <div class="verify-card">
+      <div class="step-track">
+        <div class="step active" id="step1"><div class="step-dot">1</div><div class="step-label">Item ID</div></div>
+        <div class="step" id="step2"><div class="step-dot">2</div><div class="step-label">Your Details</div></div>
+        <div class="step" id="step3"><div class="step-dot">3</div><div class="step-label">Proof</div></div>
+        <div class="step" id="step4"><div class="step-dot">4</div><div class="step-label">Confirm</div></div>
+      </div>
+      <div id="vstep1"><div class="form-group"><label>Item Reference ID *</label><input type="text" id="v_id" placeholder="e.g. REC-2025-12345"/><div class="form-hint">Find the reference ID in the item listing.</div></div><button class="btn btn-primary" onclick="vNext(1)">Next →</button></div>
+      <div id="vstep2" style="display:none">
+        <div class="form-group"><label>Full Name *</label><input type="text" id="v_name" placeholder="As per college ID"/></div>
+        <div class="form-group"><label>Roll Number / Employee ID *</label><input type="text" id="v_roll" placeholder="e.g. 21CS001"/></div>
+        <div class="form-group"><label>Contact Email *</label><input type="email" id="v_email" placeholder="college email preferred"/></div>
+        <div style="display:flex;gap:10px"><button class="btn btn-outline" onclick="vBack(2)">← Back</button><button class="btn btn-primary" onclick="vNext(2)">Next →</button></div>
+      </div>
+      <div id="vstep3" style="display:none">
+        <div class="form-group"><label>Describe Proof of Ownership *</label><textarea id="v_proof" placeholder="Serial number, unique marks, saved data, purchase receipt details…"></textarea></div>
+        <div class="form-group"><label>Upload Proof Document</label>
+          <div class="upload-zone" onclick="document.getElementById('v_file').click()">
+            <input type="file" id="v_file" accept=".pdf,.png,.jpg,.jpeg" onchange="showFileName(this,'v_fname')"/>
+            <div class="upload-icon">📄</div><p><b>Click to upload</b> — Receipt, ID, screenshot</p>
+          </div>
+          <div id="v_fname" style="font-size:13px;color:var(--muted);margin-top:6px"></div>
+        </div>
+        <div style="display:flex;gap:10px"><button class="btn btn-outline" onclick="vBack(3)">← Back</button><button class="btn btn-primary" onclick="vNext(3)">Next →</button></div>
+      </div>
+      <div id="vstep4" style="display:none">
+        <div style="background:var(--surface);border-radius:var(--radius);padding:20px;margin-bottom:20px">
+          <div class="detail-row"><span class="detail-label">Item ID</span><span class="detail-value" id="vsum_id">—</span></div>
+          <div class="detail-row"><span class="detail-label">Claimant</span><span class="detail-value" id="vsum_name">—</span></div>
+          <div class="detail-row"><span class="detail-label">Roll / ID</span><span class="detail-value" id="vsum_roll">—</span></div>
+          <div class="detail-row"><span class="detail-label">Email</span><span class="detail-value" id="vsum_email">—</span></div>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px">By submitting, you confirm this information is accurate.</p>
+        <div style="display:flex;gap:10px">
+          <button class="btn btn-outline" onclick="vBack(4)">← Back</button>
+          <button class="btn btn-secondary" onclick="submitClaim()" id="claimBtn">Submit Claim</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REWARD -->
+<div class="page" id="page-reward">
+  <div class="reward-wrap">
+    <div style="margin-bottom:24px"><div class="section-title" style="font-size:1.5rem">🎁 Send Reward</div><div style="font-size:14px;color:var(--muted);margin-top:6px">Thank the person who found and returned your item.</div></div>
+    <div class="reward-card">
+      <div class="form-group"><label>Reference Case ID *</label><input type="text" id="r_caseid" placeholder="e.g. REC-2025-12345"/></div>
+      <div class="form-group">
+        <label>Reward Amount (₹) *</label>
+        <div class="reward-amounts">
+          <button class="amount-btn" onclick="setAmount(this,100)">₹100</button>
+          <button class="amount-btn" onclick="setAmount(this,200)">₹200</button>
+          <button class="amount-btn" onclick="setAmount(this,500)">₹500</button>
+          <button class="amount-btn" onclick="setAmount(this,0)">Custom</button>
+        </div>
+        <input type="number" id="r_amount" placeholder="Enter amount in ₹" min="1"/>
+      </div>
+      <div class="form-group"><label>Payment Method *</label><select id="r_method" onchange="togglePayMethod()"><option value="">Select method…</option><option value="upi">UPI</option><option value="bank">Bank Transfer</option><option value="cash">Cash (in person)</option></select></div>
+      <div id="r_upi_wrap" style="display:none"><div class="form-group"><label>Recipient UPI ID *</label><input type="text" id="r_upi" placeholder="name@upi"/></div></div>
+      <div id="r_bank_wrap" style="display:none">
+        <div class="form-group"><label>Bank Account Number *</label><input type="text" id="r_acc" placeholder="Account number"/></div>
+        <div class="form-group"><label>IFSC Code *</label><input type="text" id="r_ifsc" placeholder="e.g. SBIN0001234"/></div>
+      </div>
+      <div class="form-group"><label>Message to Finder (optional)</label><textarea id="r_msg" placeholder="Express your gratitude…" style="min-height:70px"></textarea></div>
+      <button class="btn btn-success btn-full" onclick="submitReward()" id="rewardBtn">Send Reward</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAP -->
+<div class="page" id="page-map">
+  <div class="map-wrap">
+    <div class="map-placeholder">
+      <div class="map-header">
+        <div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px">📍 Campus Map — Item Locations</div><div style="font-size:13px;color:var(--muted);margin-top:3px">Where items were lost or found</div></div>
+        <div class="map-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#e8520a"></div>Lost</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#0e7f3c"></div>Found</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#7c3aed"></div>Claimed</div>
+        </div>
+      </div>
+      <iframe class="map-frame" id="mapFrame" src="" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div style="margin-top:20px">
+      <div class="section-title" style="margin-bottom:16px">Hotspot Locations</div>
+      <div class="grid" id="mapHotspots"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CHAT -->
+<div class="page" id="page-chat">
+  <div class="chat-wrap">
+    <div style="margin-bottom:20px"><div class="section-title" style="font-size:1.5rem">🤖 AI Query Assistant</div><div style="font-size:14px;color:var(--muted);margin-top:6px">Ask anything about lost & found — powered by Claude AI.</div></div>
+    <div class="chat-container">
+      <div class="chat-header">
+        <div class="chat-avatar">🤖</div>
+        <div class="chat-header-info"><h4>REC Lost & Found Bot</h4><p>Powered by Claude AI</p></div>
+        <div class="chat-status"></div>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg msg-bot">👋 Hi! I'm the REC Lost & Found assistant. I can help you report items, understand the claim process, or answer any campus-related questions. What do you need help with?</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+          <button onclick="sendQuick('How do I report a lost item?')" style="font-size:12px;padding:5px 12px;border-radius:100px;border:1px solid var(--border);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif">Report lost item</button>
+          <button onclick="sendQuick('What is the claim process?')" style="font-size:12px;padding:5px 12px;border-radius:100px;border:1px solid var(--border);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif">Claim process</button>
+          <button onclick="sendQuick('I found a laptop in the PPS lab. What should I do?')" style="font-size:12px;padding:5px 12px;border-radius:100px;border:1px solid var(--border);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif">I found something</button>
+        </div>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="Ask me anything…" onkeydown="if(event.key==='Enter')sendChat()"/>
+        <button class="chat-send" onclick="sendChat()">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div class="page" id="page-login">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-title" id="authTitle">Sign In</div>
+      <div class="auth-sub" id="authSub">Welcome back — access your reports and claims.</div>
+      <div class="form-group"><label>Email</label><input type="email" id="a_email" placeholder="you@rec.edu.in"/></div>
+      <div class="form-group" id="nameRow" style="display:none"><label>Full Name</label><input type="text" id="a_name" placeholder="Your full name"/></div>
+      <div class="form-group" id="rollRow" style="display:none"><label>Roll Number / Employee ID</label><input type="text" id="a_roll" placeholder="e.g. 21CS001"/></div>
+      <div class="form-group"><label>Password</label><input type="password" id="a_pass" placeholder="••••••••"/></div>
+      <div class="form-group" id="confirmRow" style="display:none"><label>Confirm Password</label><input type="password" id="a_pass2" placeholder="••••••••"/></div>
+      <button class="btn btn-primary btn-full" style="margin-top:4px" onclick="doAuth()" id="authBtn">Sign In</button>
+      <div class="auth-toggle"><span id="authToggleText">Don't have an account?</span> <a onclick="toggleAuth()" id="authToggleLink">Create one</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div class="page" id="page-profile">
+  <div class="profile-wrap">
+    <div class="profile-header">
+      <div class="profile-avatar" id="profAvatar">?</div>
+      <div class="profile-info">
+        <h2 id="profName">Guest User</h2>
+        <p id="profEmail">Not signed in</p>
+        <span class="profile-badge" id="profBadge">REC Community</span>
+      </div>
+      <div style="margin-left:auto"><button class="btn btn-outline" onclick="navigate('login')" id="profSignBtn">Sign In</button></div>
+    </div>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab(this,'myLost')">My Lost Reports</button>
+      <button class="tab" onclick="switchTab(this,'myFound')">My Found Reports</button>
+    </div>
+    <div id="tabMyLost" class="grid"></div>
+    <div id="tabMyFound" class="grid" style="display:none"></div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="itemModal">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title" id="mTitle">Item Details</div><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="modal-img" id="mImg">📦</div>
+      <div id="mTags" style="margin-bottom:14px"></div>
+      <div id="mDetails"></div>
+      <div class="modal-actions" id="mActions"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<footer>
+  <strong>Lost & Found — Ramgarh Engineering College</strong><br/>
+  Built with ❤️ by <strong>Team PentaCore</strong> &nbsp;|&nbsp;
+  <a href="mailto:1213@gmail.com">1213@gmail.com</a> &nbsp;|&nbsp; 📞 546565656<br/><br/>
+  <span style="font-size:12px;opacity:.6">Connecting the REC community to get belongings back where they belong.</span>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════
+//  CONFIG — API Base URL
+// ═══════════════════════════════════════════
+const API = '';  // empty = same origin; set to 'http://localhost:3000' if running separately
+
+// ═══════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════
+let token      = localStorage.getItem('lf_token') || null;
+let currentUser= JSON.parse(localStorage.getItem('lf_user') || 'null');
+let allItems   = [];
+const chatHistory = [];
+
+// ═══════════════════════════════════════════
+//  HTTP HELPERS
+// ═══════════════════════════════════════════
+async function apiFetch(path, opts = {}) {
+  const headers = { ...(opts.headers || {}) };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+  if (!(opts.body instanceof FormData)) headers['Content-Type'] = 'application/json';
+  const r = await fetch(API + path, { ...opts, headers });
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(data.error || 'Request failed');
+  return data;
+}
+
+// ═══════════════════════════════════════════
+//  NAVIGATION
+// ═══════════════════════════════════════════
+function navigate(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const el = document.getElementById('page-' + page);
+  if (el) el.classList.add('active');
+  const nav = document.getElementById('nav-' + page);
+  if (nav) nav.classList.add('active');
+  document.getElementById('navLinks').classList.remove('open');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (page === 'home')    { fetchItems(); loadMap(); }
+  if (page === 'browse')  renderBrowse();
+  if (page === 'profile') renderProfile();
+  if (page === 'map')     renderHotspots();
+}
+
+// ═══════════════════════════════════════════
+//  FETCH ITEMS FROM BACKEND
+// ═══════════════════════════════════════════
+async function fetchItems(params = {}) {
+  try {
+    const qs = new URLSearchParams(params).toString();
+    const data = await apiFetch('/api/items' + (qs ? '?' + qs : ''));
+    allItems = data.items || [];
+    updateStats();
+    renderHome();
+  } catch (e) {
+    document.getElementById('homeGrid').innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><h3>Could not load items</h3><p>Make sure the server is running</p></div>`;
+  }
+}
+
+// ═══════════════════════════════════════════
+//  RENDER HELPERS
+// ═══════════════════════════════════════════
+const catEmoji = { Electronics:'💻', Accessories:'👜', Documents:'📄', Clothing:'👕', Other:'📦' };
+
+function cardHTML(item) {
+  const tCls  = item.type === 'lost' ? 'tag-lost' : 'tag-found';
+  const tLbl  = item.type === 'lost' ? 'LOST'     : 'FOUND';
+  const sCls  = item.status === 'claimed' ? 'tag-claimed' : tCls;
+  const sLbl  = item.status === 'claimed' ? 'CLAIMED'     : tLbl;
+  const emoji = catEmoji[item.category] || '📦';
+  const imgEl = item.photos && item.photos[0]
+    ? `<img class="card-img" src="${item.photos[0]}" alt="${item.name}" onerror="this.outerHTML='<div class=card-img>${emoji}</div>'">`
+    : `<div class="card-img">${emoji}</div>`;
+  const reward = item.reward > 0 ? `<div class="card-reward">🏆 Reward: ₹${item.reward}</div>` : '';
+  const id = item._id || item.id;
+  return `<div class="item-card" onclick="openModal('${id}')">
+    ${imgEl}
+    <div class="card-body">
+      <div class="card-tags">
+        <span class="tag ${sCls}">${sLbl}</span>
+        <span class="tag tag-cat">${item.category}</span>
+      </div>
+      <div class="card-title">${item.name}</div>
+      <div class="card-loc">📍 ${item.location}</div>
+      <div class="card-date">🗓️ ${item.date}</div>
+      ${reward}
+      <div class="card-id"># ${item.refId || ''}</div>
+    </div>
+  </div>`;
+}
+
+function renderHome(cat = 'all') {
+  let list = [...allItems].slice(0, 9);
+  if (cat !== 'all') list = allItems.filter(i => i.category === cat).slice(0, 9);
+  document.getElementById('homeGrid').innerHTML = list.length
+    ? list.map(cardHTML).join('')
+    : `<div class="empty"><div class="empty-icon">📭</div><h3>No listings yet</h3><p>Be the first to post!</p></div>`;
+}
+
+function filterHome(el, cat) {
+  document.querySelectorAll('#homeCats .cat-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  renderHome(cat);
+}
+
+async function renderBrowse() {
+  const q    = document.getElementById('browseQ').value;
+  const type = document.getElementById('browseType').value;
+  const cat  = document.getElementById('browseCat').value;
+  const sort = document.getElementById('browseSort').value;
+  try {
+    const params = {};
+    if (q) params.q = q;
+    if (type !== 'all') params.type = type;
+    if (cat !== 'all') params.category = cat;
+    params.sort = sort;
+    const data = await apiFetch('/api/items?' + new URLSearchParams(params));
+    const items = data.items || [];
+    document.getElementById('browseGrid').innerHTML = items.map(cardHTML).join('');
+    document.getElementById('browseEmpty').style.display = items.length ? 'none' : 'block';
+  } catch {
+    document.getElementById('browseGrid').innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><h3>Could not load items</h3></div>`;
+  }
+}
+
+function doSearch() {
+  const q = document.getElementById('heroSearch').value;
+  const f = document.getElementById('heroFilter').value;
+  navigate('browse');
+  setTimeout(() => {
+    document.getElementById('browseQ').value = q;
+    document.getElementById('browseType').value = f;
+    renderBrowse();
+  }, 100);
+}
+
+function updateStats() {
+  const total    = allItems.length;
+  const returned = allItems.filter(i => i.status === 'claimed').length;
+  const active   = allItems.filter(i => i.status === 'active').length;
+  animNum('statTotal', total);
+  animNum('statReturned', returned);
+  animNum('statActive', active);
+}
+function animNum(id, n) {
+  const el = document.getElementById(id);
+  let c = 0; const step = Math.max(1, Math.ceil(n / 20));
+  const iv = setInterval(() => { c = Math.min(c + step, n); el.textContent = c; if (c >= n) clearInterval(iv); }, 40);
+}
+
+// ═══════════════════════════════════════════
+//  MODAL
+// ═══════════════════════════════════════════
+async function openModal(id) {
+  let item = allItems.find(i => (i._id || i.id) === id);
+  if (!item) {
+    try { item = await apiFetch('/api/items/' + id); } catch { return; }
+  }
+  document.getElementById('mTitle').textContent = item.name;
+  const emoji = catEmoji[item.category] || '📦';
+  if (item.photos && item.photos[0]) {
+    document.getElementById('mImg').outerHTML = `<img class="modal-img" id="mImg" src="${item.photos[0]}" alt="${item.name}">`;
+  } else {
+    document.getElementById('mImg').textContent = emoji;
+  }
+  const tCls = item.type === 'lost' ? 'tag-lost' : 'tag-found';
+  document.getElementById('mTags').innerHTML = `
+    <span class="tag ${tCls}" style="font-size:13px;padding:4px 14px">${item.type.toUpperCase()}</span>
+    <span class="tag tag-cat" style="font-size:13px;padding:4px 14px;margin-left:6px">${item.category}</span>
+    ${item.status==='claimed'?'<span class="tag tag-claimed" style="font-size:13px;padding:4px 14px;margin-left:6px">CLAIMED</span>':''}
+    ${item.reward>0?`<span class="tag" style="background:var(--warn-bg);color:var(--warn);font-size:13px;padding:4px 14px;margin-left:6px;border-radius:100px">Reward ₹${item.reward}</span>`:''}
+  `;
+  document.getElementById('mDetails').innerHTML = `
+    <div class="detail-row"><span class="detail-label">Reference ID</span><span class="detail-value" style="font-family:monospace">${item.refId||'—'}</span></div>
+    <div class="detail-row"><span class="detail-label">Location</span><span class="detail-value">${item.location}</span></div>
+    <div class="detail-row"><span class="detail-label">Date</span><span class="detail-value">${item.date}</span></div>
+    <div class="detail-row"><span class="detail-label">Description</span><span class="detail-value">${item.description}</span></div>
+    ${item.holdingAt?`<div class="detail-row"><span class="detail-label">Currently at</span><span class="detail-value">${item.holdingAt}</span></div>`:''}
+    <div class="detail-row"><span class="detail-label">Posted by</span><span class="detail-value">${item.postedByName||'Anonymous'}</span></div>
+    <div class="detail-row"><span class="detail-label">Contact</span><span class="detail-value">${item.contact}</span></div>
+    ${item.phone?`<div class="detail-row"><span class="detail-label">Phone</span><span class="detail-value">${item.phone}</span></div>`:''}
+  `;
+  const act = document.getElementById('mActions');
+  if (item.status !== 'claimed') {
+    act.innerHTML = item.type === 'found'
+      ? `<button class="btn btn-primary" onclick="closeModal();navigate('verify')">Claim This Item</button><a class="btn btn-outline" href="mailto:${item.contact}">Email Finder</a>`
+      : `<a class="btn btn-outline" href="mailto:${item.contact}">Contact Reporter</a>${item.phone?`<a class="btn btn-outline" href="tel:${item.phone}">Call Reporter</a>`:''}`;
+  } else {
+    act.innerHTML = `<div style="color:var(--success);font-weight:500;font-size:14px">✅ This item has been claimed and returned.</div>`;
+  }
+  document.getElementById('itemModal').classList.add('open');
+}
+function closeModal() { document.getElementById('itemModal').classList.remove('open'); }
+document.getElementById('itemModal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+
+// ═══════════════════════════════════════════
+//  FORM SUBMISSIONS
+// ═══════════════════════════════════════════
+async function submitLost() {
+  if (!requireLogin()) return;
+  const name = document.getElementById('l_name').value.trim();
+  const cat  = document.getElementById('l_cat').value;
+  const date = document.getElementById('l_date').value;
+  const loc  = document.getElementById('l_loc').value.trim();
+  const desc = document.getElementById('l_desc').value.trim();
+  const email= document.getElementById('l_email').value.trim();
+  if (!name||!cat||!date||!loc||!desc||!email) { toast('Please fill in all required fields.','error'); return; }
+  const fd = new FormData();
+  fd.append('name', name); fd.append('category', cat); fd.append('date', date);
+  fd.append('location', loc); fd.append('description', desc); fd.append('contact', email);
+  fd.append('phone', document.getElementById('l_phone').value);
+  fd.append('reward', document.getElementById('l_reward').value || 0);
+  const files = document.getElementById('l_photos').files;
+  Array.from(files).slice(0,5).forEach(f => fd.append('photos', f));
+  const btn = document.getElementById('lostBtn');
+  btn.disabled = true; btn.textContent = 'Submitting…';
+  try {
+    const item = await apiFetch('/api/items/lost', { method: 'POST', body: fd });
+    toast(`Report submitted! ID: ${item.refId}`, 'success');
+    clearLostForm();
+    await fetchItems();
+    setTimeout(() => navigate('browse'), 1200);
+  } catch(e) {
+    toast(e.message, 'error');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Submit Report';
+  }
+}
+
+async function submitFound() {
+  if (!requireLogin()) return;
+  const name    = document.getElementById('f_name').value.trim();
+  const cat     = document.getElementById('f_cat').value;
+  const date    = document.getElementById('f_date').value;
+  const loc     = document.getElementById('f_loc').value.trim();
+  const desc    = document.getElementById('f_desc').value.trim();
+  const email   = document.getElementById('f_email').value.trim();
+  const holding = document.getElementById('f_holding').value.trim();
+  if (!name||!cat||!date||!loc||!desc||!email||!holding) { toast('Please fill in all required fields.','error'); return; }
+  const fd = new FormData();
+  fd.append('name', name); fd.append('category', cat); fd.append('date', date);
+  fd.append('location', loc); fd.append('description', desc); fd.append('contact', email);
+  fd.append('phone', document.getElementById('f_phone').value);
+  fd.append('holdingAt', holding);
+  const files = document.getElementById('f_photos').files;
+  Array.from(files).slice(0,5).forEach(f => fd.append('photos', f));
+  const btn = document.getElementById('foundBtn');
+  btn.disabled = true; btn.textContent = 'Submitting…';
+  try {
+    const item = await apiFetch('/api/items/found', { method: 'POST', body: fd });
+    toast(`Found item posted! ID: ${item.refId}`, 'success');
+    clearFoundForm();
+    await fetchItems();
+    setTimeout(() => navigate('browse'), 1200);
+  } catch(e) {
+    toast(e.message, 'error');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Submit Found Report';
+  }
+}
+
+// ═══════════════════════════════════════════
+//  VERIFY WIZARD
+// ═══════════════════════════════════════════
+function vNext(step) {
+  if (step===1 && !document.getElementById('v_id').value.trim()) { toast('Please enter the item ID','error'); return; }
+  if (step===2) {
+    if (!document.getElementById('v_name').value.trim()||!document.getElementById('v_roll').value.trim()||!document.getElementById('v_email').value.trim())
+      { toast('Please fill in all fields','error'); return; }
+  }
+  if (step===3) {
+    if (!document.getElementById('v_proof').value.trim()) { toast('Please describe your proof of ownership','error'); return; }
+    document.getElementById('vsum_id').textContent    = document.getElementById('v_id').value;
+    document.getElementById('vsum_name').textContent  = document.getElementById('v_name').value;
+    document.getElementById('vsum_roll').textContent  = document.getElementById('v_roll').value;
+    document.getElementById('vsum_email').textContent = document.getElementById('v_email').value;
+  }
+  document.getElementById('vstep'+step).style.display = 'none';
+  document.getElementById('vstep'+(step+1)).style.display = 'block';
+  document.getElementById('step'+step).classList.replace('active','done');
+  document.getElementById('step'+(step+1)).classList.add('active');
+}
+function vBack(step) {
+  document.getElementById('vstep'+step).style.display = 'none';
+  document.getElementById('vstep'+(step-1)).style.display = 'block';
+  document.getElementById('step'+step).classList.remove('active');
+  document.getElementById('step'+(step-1)).classList.remove('done');
+  document.getElementById('step'+(step-1)).classList.add('active');
+}
+async function submitClaim() {
+  const btn = document.getElementById('claimBtn');
+  btn.disabled = true; btn.textContent = 'Submitting…';
+  const fd = new FormData();
+  fd.append('itemRefId', document.getElementById('v_id').value);
+  fd.append('name',      document.getElementById('v_name').value);
+  fd.append('rollNumber',document.getElementById('v_roll').value);
+  fd.append('proofDesc', document.getElementById('v_proof').value);
+  const file = document.getElementById('v_file').files[0];
+  if (file) fd.append('proofFile', file);
+  try {
+    await apiFetch('/api/claims', { method: 'POST', body: fd });
+    toast('Claim submitted! The finder will contact you shortly.', 'success');
+    [1,2,3,4].forEach(i => {
+      const el = document.getElementById('vstep'+i); if(el) el.style.display = 'none';
+      const s  = document.getElementById('step'+i);  if(s)  s.classList.remove('active','done');
+    });
+    document.getElementById('vstep1').style.display = 'block';
+    document.getElementById('step1').classList.add('active');
+    ['v_id','v_name','v_roll','v_email','v_proof'].forEach(id => document.getElementById(id).value='');
+  } catch(e) {
+    toast(e.message, 'error');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Submit Claim';
+  }
+}
+
+// ═══════════════════════════════════════════
+//  REWARD
+// ═══════════════════════════════════════════
+function setAmount(btn, val) {
+  document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  if (val > 0) document.getElementById('r_amount').value = val;
+  else { document.getElementById('r_amount').value = ''; document.getElementById('r_amount').focus(); }
+}
+function togglePayMethod() {
+  const m = document.getElementById('r_method').value;
+  document.getElementById('r_upi_wrap').style.display  = m==='upi'  ? 'block' : 'none';
+  document.getElementById('r_bank_wrap').style.display = m==='bank' ? 'block' : 'none';
+}
+async function submitReward() {
+  const id     = document.getElementById('r_caseid').value.trim();
+  const amount = document.getElementById('r_amount').value;
+  const method = document.getElementById('r_method').value;
+  if (!id||!amount||!method) { toast('Please fill in all required fields','error'); return; }
+  const body = { itemRefId:id, amount, method,
+    upiId: document.getElementById('r_upi').value,
+    accountNumber: document.getElementById('r_acc').value,
+    ifsc: document.getElementById('r_ifsc').value,
+    message: document.getElementById('r_msg').value };
+  const btn = document.getElementById('rewardBtn');
+  btn.disabled = true; btn.textContent = 'Sending…';
+  try {
+    await apiFetch('/api/rewards', { method:'POST', body: JSON.stringify(body) });
+    toast(`Reward of ₹${amount} sent successfully!`, 'success');
+    ['r_caseid','r_amount','r_method','r_upi','r_acc','r_ifsc','r_msg'].forEach(id => document.getElementById(id).value='');
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+    document.getElementById('r_upi_wrap').style.display = document.getElementById('r_bank_wrap').style.display = 'none';
+  } catch(e) {
+    toast(e.message, 'error');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Send Reward';
+  }
+}
+
+// ═══════════════════════════════════════════
+//  AUTH
+// ═══════════════════════════════════════════
+let isSignup = false;
+function toggleAuth() {
+  isSignup = !isSignup;
+  document.getElementById('authTitle').textContent   = isSignup ? 'Create Account' : 'Sign In';
+  document.getElementById('authSub').textContent     = isSignup ? 'Join the REC Lost & Found community.' : 'Welcome back — access your reports and claims.';
+  document.getElementById('authBtn').textContent     = isSignup ? 'Create Account' : 'Sign In';
+  document.getElementById('authToggleText').textContent = isSignup ? 'Already have an account?' : "Don't have an account?";
+  document.getElementById('authToggleLink').textContent = isSignup ? 'Sign in' : 'Create one';
+  ['nameRow','rollRow','confirmRow'].forEach(id => document.getElementById(id).style.display = isSignup ? 'block' : 'none');
+}
+async function doAuth() {
+  const email = document.getElementById('a_email').value.trim();
+  const pass  = document.getElementById('a_pass').value;
+  if (!email||!pass) { toast('Please fill in email and password','error'); return; }
+  const btn = document.getElementById('authBtn');
+  btn.disabled = true;
+  try {
+    let data;
+    if (isSignup) {
+      const name  = document.getElementById('a_name').value.trim();
+      const pass2 = document.getElementById('a_pass2').value;
+      const roll  = document.getElementById('a_roll').value.trim();
+      if (!name) { toast('Please enter your name','error'); return; }
+      if (pass !== pass2) { toast('Passwords do not match','error'); return; }
+      data = await apiFetch('/api/auth/signup', { method:'POST', body: JSON.stringify({ name, email, password:pass, rollNumber:roll }) });
+      toast('Account created! Welcome to REC Lost & Found.', 'success');
+    } else {
+      data = await apiFetch('/api/auth/login', { method:'POST', body: JSON.stringify({ email, password:pass }) });
+      toast(`Welcome back, ${data.user.name}!`, 'success');
+    }
+    token = data.token;
+    currentUser = data.user;
+    localStorage.setItem('lf_token', token);
+    localStorage.setItem('lf_user', JSON.stringify(currentUser));
+    updateNavForUser();
+    setTimeout(() => navigate('profile'), 600);
+  } catch(e) {
+    toast(e.message, 'error');
+  } finally {
+    btn.disabled = false;
+  }
+}
+function signOut() {
+  token = null; currentUser = null;
+  localStorage.removeItem('lf_token');
+  localStorage.removeItem('lf_user');
+  updateNavForUser();
+  toast('Signed out.', 'info');
+  navigate('home');
+}
+function requireLogin() {
+  if (!token) { toast('Please sign in to continue.', 'error'); setTimeout(() => navigate('login'), 800); return false; }
+  return true;
+}
+function updateNavForUser() {
+  const loginLink = document.getElementById('nav-login');
+  if (currentUser) {
+    loginLink.textContent = currentUser.name.split(' ')[0];
+    loginLink.onclick = () => navigate('profile');
+  } else {
+    loginLink.textContent = 'Sign In';
+    loginLink.onclick = () => navigate('login');
+  }
+}
+
+// ═══════════════════════════════════════════
+//  PROFILE
+// ═══════════════════════════════════════════
+async function renderProfile() {
+  if (!currentUser) {
+    document.getElementById('profAvatar').textContent = '?';
+    document.getElementById('profName').textContent   = 'Guest User';
+    document.getElementById('profEmail').textContent  = 'Not signed in';
+    document.getElementById('profSignBtn').textContent = 'Sign In';
+    document.getElementById('profSignBtn').onclick = () => navigate('login');
+    ['tabMyLost','tabMyFound'].forEach(id => {
+      document.getElementById(id).innerHTML = `<div class="empty"><div class="empty-icon">🔒</div><h3>Please sign in</h3><p><a onclick="navigate('login')" style="color:var(--sky);cursor:pointer">Sign in to view your reports →</a></p></div>`;
+    });
+    return;
+  }
+  const initials = currentUser.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  document.getElementById('profAvatar').textContent  = initials;
+  document.getElementById('profName').textContent    = currentUser.name;
+  document.getElementById('profEmail').textContent   = currentUser.email;
+  document.getElementById('profBadge').textContent   = currentUser.rollNumber ? `Roll: ${currentUser.rollNumber}` : 'REC Community';
+  document.getElementById('profSignBtn').textContent  = 'Sign Out';
+  document.getElementById('profSignBtn').onclick = signOut;
+  try {
+    const items = await apiFetch('/api/items/user/mine');
+    const lost  = items.filter(i => i.type === 'lost');
+    const found = items.filter(i => i.type === 'found');
+    document.getElementById('tabMyLost').innerHTML  = lost.length  ? lost.map(cardHTML).join('')  : `<div class="empty"><div class="empty-icon">📦</div><h3>No lost reports yet</h3><p><a onclick="navigate('lost-form')" style="color:var(--sky);cursor:pointer">Report a lost item →</a></p></div>`;
+    document.getElementById('tabMyFound').innerHTML = found.length ? found.map(cardHTML).join('') : `<div class="empty"><div class="empty-icon">🔍</div><h3>No found reports yet</h3><p><a onclick="navigate('found-form')" style="color:var(--sky);cursor:pointer">Post a found item →</a></p></div>`;
+  } catch {
+    ['tabMyLost','tabMyFound'].forEach(id => { document.getElementById(id).innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><h3>Could not load items</h3></div>`; });
+  }
+}
+function switchTab(el, tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tabMyLost').style.display  = tab === 'myLost'  ? 'grid' : 'none';
+  document.getElementById('tabMyFound').style.display = tab === 'myFound' ? 'grid' : 'none';
+}
+
+// ═══════════════════════════════════════════
+//  MAP
+// ═══════════════════════════════════════════
+async function loadMap() {
+  try {
+    const cfg = await apiFetch('/api/config');
+    const key = cfg.googleMapsKey;
+    const src = key
+      ? `https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap`
+      : `https://maps.google.com/maps?q=Ramgarh+Engineering+College&output=embed&z=15`;
+    document.getElementById('mapFrame').src = src;
+  } catch {
+    document.getElementById('mapFrame').src = `https://maps.google.com/maps?q=Ramgarh+Engineering+College&output=embed&z=15`;
+  }
+}
+function renderHotspots() {
+  const locs = {};
+  allItems.forEach(i => {
+    const loc = i.location.split(',')[0].trim();
+    if (!locs[loc]) locs[loc] = { loc, lost:0, found:0 };
+    if (i.type === 'lost') locs[loc].lost++; else locs[loc].found++;
+  });
+  const list = Object.values(locs).sort((a,b) => (b.lost+b.found)-(a.lost+a.found));
+  document.getElementById('mapHotspots').innerHTML = list.length
+    ? list.map(h => `<div class="item-card" style="cursor:default"><div class="card-body"><div class="card-title">📍 ${h.loc}</div><div style="display:flex;gap:12px;margin-top:8px"><span class="tag tag-lost">Lost: ${h.lost}</span><span class="tag tag-found">Found: ${h.found}</span></div></div></div>`).join('')
+    : '<div class="empty"><div class="empty-icon">🗺️</div><h3>No location data yet</h3></div>';
+}
+
+// ═══════════════════════════════════════════
+//  AI CHATBOT — via backend proxy
+// ═══════════════════════════════════════════
+function sendQuick(text) { document.getElementById('chatInput').value = text; sendChat(); }
+async function sendChat() {
+  const input = document.getElementById('chatInput');
+  const msg   = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+  appendMsg(msg, 'user');
+  chatHistory.push({ role:'user', content: msg });
+  const typing = appendTyping();
+  try {
+    const data = await apiFetch('/api/chat', { method:'POST', body: JSON.stringify({ messages: chatHistory }) });
+    typing.remove();
+    chatHistory.push({ role:'assistant', content: data.reply });
+    appendMsg(data.reply, 'bot');
+  } catch {
+    typing.remove();
+    appendMsg('Sorry, the AI assistant is unavailable right now. Please check that ANTHROPIC_API_KEY is set in your .env file.', 'bot');
+  }
+}
+function appendMsg(text, type) {
+  const box = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = `msg msg-${type}`;
+  div.textContent = text;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+  return div;
+}
+function appendTyping() {
+  const box = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'typing';
+  div.innerHTML = '<span></span><span></span><span></span>';
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+  return div;
+}
+
+// ═══════════════════════════════════════════
+//  MISC HELPERS
+// ═══════════════════════════════════════════
+function previewPhotos(inputId, previewId) {
+  const preview = document.getElementById(previewId);
+  preview.innerHTML = '';
+  Array.from(document.getElementById(inputId).files).slice(0,5).forEach(f => {
+    const reader = new FileReader();
+    reader.onload = e => { const img = document.createElement('img'); img.src = e.target.result; preview.appendChild(img); };
+    reader.readAsDataURL(f);
+  });
+}
+function showFileName(input, targetId) {
+  const el = document.getElementById(targetId);
+  if (el && input.files[0]) el.textContent = '📎 ' + input.files[0].name;
+}
+function clearLostForm()  { ['l_name','l_cat','l_date','l_loc','l_desc','l_email','l_phone','l_reward'].forEach(id=>{const el=document.getElementById(id);if(el){if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';}});document.getElementById('l_preview').innerHTML=''; }
+function clearFoundForm() { ['f_name','f_cat','f_date','f_loc','f_desc','f_email','f_phone','f_holding'].forEach(id=>{const el=document.getElementById(id);if(el){if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';}});document.getElementById('f_preview').innerHTML=''; }
+
+function toast(msg, type='info') {
+  const wrap = document.getElementById('toastWrap');
+  const div  = document.createElement('div');
+  div.className = `toast ${type}`;
+  div.innerHTML = `<span>${{success:'✅',error:'❌',info:'ℹ️'}[type]||'ℹ️'}</span><span>${msg}</span>`;
+  wrap.appendChild(div);
+  setTimeout(() => { div.style.opacity='0';div.style.transform='translateX(30px)';div.style.transition='.3s';setTimeout(()=>div.remove(),300); }, 3800);
+}
+
+// ═══════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  const today = new Date().toISOString().split('T')[0];
+  ['l_date','f_date'].forEach(id => { const el=document.getElementById(id); if(el) el.value=today; });
+  updateNavForUser();
+  fetchItems();
+  loadMap();
+});
+</script>
+</body>
+</html>

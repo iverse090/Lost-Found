@@ -1,0 +1,119 @@
+### REC Lost & Found — API Test File
+### Install "REST Client" extension in VS Code, then click "Send Request" above each block.
+
+@base = http://localhost:3000
+@token = PASTE_YOUR_JWT_TOKEN_HERE
+
+###########################################################
+# HEALTH
+###########################################################
+
+### Health Check
+GET {{base}}/api/health
+
+###########################################################
+# AUTH
+###########################################################
+
+### Sign Up
+POST {{base}}/api/auth/signup
+Content-Type: application/json
+
+{
+  "name": "Raj Kumar",
+  "email": "raj@rec.edu.in",
+  "password": "password123",
+  "rollNumber": "21CS001"
+}
+
+###
+
+### Login
+POST {{base}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "raj@rec.edu.in",
+  "password": "password123"
+}
+
+###
+
+### Get My Profile
+GET {{base}}/api/auth/me
+Authorization: Bearer {{token}}
+
+###########################################################
+# ITEMS
+###########################################################
+
+### Get All Items
+GET {{base}}/api/items
+
+###
+
+### Search Items
+GET {{base}}/api/items?q=laptop&type=found&sort=newest
+
+###
+
+### Get Single Item (replace ITEM_ID)
+GET {{base}}/api/items/ITEM_ID
+
+###
+
+### Get My Items
+GET {{base}}/api/items/user/mine
+Authorization: Bearer {{token}}
+
+###########################################################
+# CLAIMS
+###########################################################
+
+### Submit a Claim (replace REF_ID)
+POST {{base}}/api/claims
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "itemRefId": "REC-2025-12345",
+  "name": "Raj Kumar",
+  "rollNumber": "21CS001",
+  "proofDesc": "The laptop has a 'REC CSE' sticker on the lid and my name on the charger."
+}
+
+###########################################################
+# REWARDS
+###########################################################
+
+### Send Reward
+POST {{base}}/api/rewards
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "itemRefId": "REC-2025-12345",
+  "amount": 200,
+  "method": "upi",
+  "upiId": "finder@okaxis",
+  "message": "Thank you so much for returning my laptop!"
+}
+
+###########################################################
+# CHATBOT
+###########################################################
+
+### Chat with AI
+POST {{base}}/api/chat
+Content-Type: application/json
+
+{
+  "messages": [
+    { "role": "user", "content": "How do I claim a found item?" }
+  ]
+}
+
+###
+
+### Config (get Google Maps key)
+GET {{base}}/api/config
