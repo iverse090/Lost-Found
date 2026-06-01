@@ -1,5 +1,5 @@
 # 🎓 REC Lost & Found Platform
-**Built by Team PentaCore — Ramgarh Engineering College**
+**Built by Vivek— Ramgarh Engineering College**
 
 A full-stack Lost & Found web application for campus use. Students and staff can report lost/found items, claim ownership, and reward finders — all powered by MongoDB, Cloudinary, Claude AI, and Gmail.
 
@@ -270,7 +270,7 @@ GOOGLE_MAPS_API_KEY=AIzaSy_your_key
 
 ---
 
-## 👥 Team PentaCore
+## 👥 Vivek
 
 Built for Ramgarh Engineering College | 2025
 Contact: 1213@gmail.com | 📞 546565656
